@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleiçao Maria Constancia | Cemus I</title>
+    <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1105227184077029426/1204514626721681500/Novo_projeto_5_2E784F7.png?ex=65d502a9&is=65c28da9&hm=4e265d714035246f2e5e0030307b01987e2116268a649d7e4d380fb0093124c1&=&format=webp&quality=lossless&width=417&height=417">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <h1>Eleição</h1>
+
+    <div id="loginSection">
+        <h2>Insira a senha para votar</h2>
+        <input type="password" id="senhaInput">
+        <button onclick="verificarSenha()">Entrar</button>
+    </div>
+
+    <div id="eleicaoSection" style="display: none;">
+        <h2>Candidatos:</h2>
+        <ul>
+            <li>7 jovens visionarios <span id="votosCandidato1">0</span> votos</li>
+            <li>10 evoluçao da juventude <span id="votosCandidato2">0</span> votos</li>
+            <li>72 Os Inovadores  <span id="votosCandidato3">0</span> votos</li>
+            <li>2 arara azul <span id="votosCandidato4">0</span> votos</li>
+        </ul>
+
+        <h2>Votar:</h2>
+        <button onclick="votar(1)">7 jovens visionarios</button>
+        <button onclick="votar(2)">10 evoluçoes da juventude</button>
+        <button onclick="votar(3)">72 Os Inovadores</button>
+        <button onclick="votar(4)">2 arara azul</button>
+    </div>
+
+    <script>
+        var senhaCorreta = "maria";
+
+        function verificarSenha() {
+            var senhaInput = document.getElementById("senhaInput").value;
+            if (senhaInput === senhaCorreta) {
+                document.getElementById("loginSection").style.display = "none";
+                document.getElementById("eleicaoSection").style.display = "block";
+            } else {
+                alert("Senha incorreta. Tente novamente.");
+            }
+        }
+
+        function votar(candidato) {
+            switch (candidato) {
+                case 1:
+                    var votosCandidato1 = document.getElementById("votosCandidato1");
+                    votosCandidato1.textContent = parseInt(votosCandidato1.textContent) + 1;
+                    break;
+                case 2:
+                    var votosCandidato2 = document.getElementById("votosCandidato2");
+                    votosCandidato2.textContent = parseInt(votosCandidato2.textContent) + 1;
+                    break;
+                case 3:
+                    var votosCandidato3 = document.getElementById("votosCandidato3");
+                    votosCandidato3.textContent = parseInt(votosCandidato3.textContent) + 1;
+                    break;
+                case 4:
+                    var votosCandidato4 = document.getElementById("votosCandidato4");
+                    votosCandidato4.textContent = parseInt(votosCandidato4.textContent) + 1;
+                    break;
+                default:
+                    console.error("Candidato inválido");
+                    break;
+            }
+
+            // Adicione aqui o caminho do som
+            var audio = new Audio("./src/SoundEletionBrazil.wav");
+            audio.play();
+
+            // Redireciona para a seção de login após votar e limpa o campo de senha
+            document.getElementById("loginSection").style.display = "block";
+            document.getElementById("eleicaoSection").style.display = "none";
+            document.getElementById("senhaInput").value = ""; // Limpa o campo de senha
+        }
+    </script>
+</body>
+</html>
